@@ -4,7 +4,7 @@ var moment = require('moment');
 
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
-var TodoSearch = require('TodoSearch');
+import TodoSearch from 'TodoSearch';
 var TodoAPI = require('TodoAPI');
 
 var TodoApp = React.createClass({
@@ -18,12 +18,6 @@ var TodoApp = React.createClass({
   componentDidUpdate: function () {
     TodoAPI.setTodos(this.state.todos);
   },
-  handleSearch: function (searchText, showCompleted) {
-    this.setState({
-      showCompleted: showCompleted,
-      searchText: searchText.toLowerCase()
-    });
-  },
   render: function () {
     var {todos, showCompleted, searchText} = this.state;
     var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
@@ -35,7 +29,7 @@ var TodoApp = React.createClass({
         <div className='row'>
           <div className='column small-centered small-11 medium-6 large-5'>
             <div className='container'>
-              <TodoSearch onSearch={this.handleSearch}/>
+              <TodoSearch/>
               <TodoList/>
               <AddTodo/>
             </div>
